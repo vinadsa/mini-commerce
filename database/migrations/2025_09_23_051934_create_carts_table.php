@@ -12,8 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // bigint unsigned primary key dengan auto increment
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string('session_token', 128)->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            
+            // Unique constraints
+            $table->unique('user_id', 'uniq_user_cart');
+            $table->unique('session_token', 'uniq_session');
+            
+            // Index
+            $table->index('user_id', 'idx_cart_user');
+            
+            // Foreign key constraint
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

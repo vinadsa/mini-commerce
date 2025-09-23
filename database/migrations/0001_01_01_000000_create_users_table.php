@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id(); // unsigned int AUTO_INCREMENT PRIMARY KEY
+            $table->string('name', 100); // varchar(100) NOT NULL
+            $table->string('email', 255)->unique(); // varchar(255) NOT NULL dengan UNIQUE KEY
+            $table->string('password_hash', 255); // varchar(255) NOT NULL (ganti dari 'password')
+            $table->enum('role', ['user', 'admin'])->default('user'); // enum dengan default 'user'
+            $table->string('phone', 32)->nullable(); // varchar(32) DEFAULT NULL
+            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            $table->timestamp('deleted_at')->nullable(); // untuk soft deletes
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

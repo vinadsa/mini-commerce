@@ -12,8 +12,31 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedInteger('product_id')->nullable();
+            $table->string('product_name', 200);
+            $table->string('sku', 64)->nullable();
+            $table->decimal('price', 12, 2);
+            $table->unsignedSmallInteger('qty');
+            $table->decimal('subtotal', 12, 2);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+
+            // Indexes
+            $table->index('order_id');
+            $table->index('product_id');
+
+            // Foreign key constraints
+            $table->foreign('order_id')
+                  ->references('id')
+                  ->on('orders')
+                  ->onDelete('cascade');
+                  
+            $table->foreign('product_id')
+                  ->references('id')
+                  ->on('products')
+                  ->onDelete('set null');
         });
     }
 
