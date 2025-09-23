@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('price', 12, 2);
             $table->unsignedSmallInteger('qty');
             $table->decimal('subtotal', 12, 2);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
             // Indexes
             $table->index('order_id');

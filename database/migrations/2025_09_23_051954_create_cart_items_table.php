@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedSmallInteger('qty')->default(1);
             $table->decimal('price', 12, 2);
-            $table->timestamp('added_at')->useCurrent();
+            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             
             // Unique constraint untuk cart_id dan product_id
             $table->unique(['cart_id', 'product_id'], 'uniq_cart_product');

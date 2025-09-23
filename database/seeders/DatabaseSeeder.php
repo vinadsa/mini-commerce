@@ -20,22 +20,29 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        // INI HARUS URUT YA GES DATA MANA YANG MASUK DLU, Ini aku comment contohnya, realnya silahkan dibuat yhh
         $this->call([
-            UsersTableSeeder::class,
-            CategoriesTableSeeder::class,
-            ProductsTableSeeder::class,
-            ProductImagesTableSeeder::class,
-            CartsTableSeeder::class,
-            OrdersTableSeeder::class,
-            OrderItemsTableSeeder::class,
-            PaymentsTableSeeder::class,
-            ShipmentsTableSeeder::class,
-            CartItemsTableSeeder::class,
-            OrderStatusSeeder::class,
-            CouponSeeder::class,
-            UserAddressSeeder::class,
-            ReviewSeeder::class,
-            OrderStatusHistorySeeder::class,
+            // // 1. Users & Master Status
+            // UsersTableSeeder::class,
+            // OrderStatusSeeder::class,
+            // // 2. Katalog
+            // CategoriesTableSeeder::class,
+            // ProductsTableSeeder::class,
+            // ProductImagesTableSeeder::class,
+            // // 3. Cart (butuh users & products)
+            // CartsTableSeeder::class,
+            // CartItemsTableSeeder::class,
+            // // 4. Orders (butuh status & users)
+            // OrdersTableSeeder::class,
+            // OrderItemsTableSeeder::class,
+            // PaymentsTableSeeder::class,
+            // ShipmentsTableSeeder::class,
+            // // 5. Data tambahan
+            // UserAddressSeeder::class,
+            // CouponSeeder::class,
+            // ReviewSeeder::class,
+            // // 6. Riwayat status (terakhir)
+            // OrderStatusHistorySeeder::class,
         ]);
     }
 }

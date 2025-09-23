@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // unsigned int AUTO_INCREMENT PRIMARY KEY
             $table->string('name', 100); // varchar(100) NOT NULL
-            $table->string('email', 255)->unique(); // varchar(255) NOT NULL dengan UNIQUE KEY
-            $table->string('password_hash', 255); // varchar(255) NOT NULL (ganti dari 'password')
+            $table->string('email', 100)->unique(); // varchar(100) NOT NULL dengan UNIQUE KEY
+            $table->string('password', 100); // varchar(100) NOT NULL
             $table->enum('role', ['user', 'admin'])->default('user'); // enum dengan default 'user'
-            $table->string('phone', 32)->nullable(); // varchar(32) DEFAULT NULL
+            $table->string('phone', 16)->nullable(); // varchar(16) DEFAULT NULL
             $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
             $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            $table->timestamp('deleted_at')->nullable(); // untuk soft deletes
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

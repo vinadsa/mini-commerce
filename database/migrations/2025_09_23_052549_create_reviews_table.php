@@ -14,25 +14,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT
-            
-            // Foreign key columns
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
-            
-            // Review columns
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->unsignedTinyInteger('rating');
             $table->string('title', 200)->nullable();
             $table->text('body')->nullable();
             $table->boolean('is_approved')->default(false);
-            
-            // Timestamp - hanya created_at
             $table->timestamp('created_at')->useCurrent();
-            
-            // Indexes
-            $table->index('user_id');
-            $table->index('product_id');
+
             $table->index('rating');
+            $table->unique(['user_id', 'product_id'], 'uniq_review_user_product');
         });
         
         // Hanya tambahkan check constraint jika menggunakan MySQL

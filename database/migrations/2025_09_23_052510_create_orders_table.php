@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_number', 40)->unique();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            // order_statuses sudah harus ada dulu
             $table->foreignId('status_id')->default(1)->constrained('order_statuses')->restrictOnDelete();
             $table->decimal('total', 12, 2);
             $table->unsignedInteger('total_items')->default(0);
@@ -22,7 +23,8 @@ return new class extends Migration
             $table->text('shipping_address_text')->nullable();
             $table->text('billing_address_text')->nullable();
             $table->text('note')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             
             // Indexes untuk performa
             $table->index('status_id');

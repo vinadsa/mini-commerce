@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id(); // bigint unsigned primary key dengan auto increment
-            $table->unsignedInteger('user_id')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('session_token', 128)->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             
             // Unique constraints
             $table->unique('user_id', 'uniq_user_cart');
@@ -24,12 +24,6 @@ return new class extends Migration
             
             // Index
             $table->index('user_id', 'idx_cart_user');
-            
-            // Foreign key constraint
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');
         });
     }
 
