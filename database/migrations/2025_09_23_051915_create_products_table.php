@@ -22,7 +22,6 @@ return new class extends Migration {
             
             // Indexes
             $table->index('category_id', 'idx_products_category');
-            $table->fullText(['name', 'description'], 'ft_products_name_description');
         });
     }
 

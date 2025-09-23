@@ -32,21 +32,13 @@ return new class extends Migration
             // Indexes
             $table->index('user_id');
             $table->index('product_id');
-            
-            // Foreign key constraints
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');
-                  
-            $table->foreign('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onDelete('cascade');
+            $table->index('rating');
         });
         
-        // Add check constraint for rating (1-5)
-        DB::statement('ALTER TABLE reviews ADD CONSTRAINT reviews_rating_check CHECK (rating BETWEEN 1 AND 5)');
+        // Hanya tambahkan check constraint jika menggunakan MySQL
+        if (config('database.default') === 'mysql') {
+            DB::statement('ALTER TABLE reviews ADD CONSTRAINT reviews_rating_check CHECK (rating BETWEEN 1 AND 5)');
+        }
     }
 
     /**
