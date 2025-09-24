@@ -46,3 +46,14 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+
+
+// Urutan seeding yang aman:
+// categories
+// products (+ product_images)
+// users
+// carts (+ cart_items)
+// order_statuses
+// orders (+ order_items, payments, shipments, order_status_history)
+// reviews
+// coupons
