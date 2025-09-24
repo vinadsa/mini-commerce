@@ -107,15 +107,19 @@ class ShipmentSeeder extends Seeder
                 $shipStatus = 'Menunggu Pengiriman';
             }
 
-            // Tentukan waktu_dikirim untuk contoh data
+            // Tentukan waktu_dikirim dan waktu_diterima untuk contoh data
             if ($shipStatus === 'Sudah Diterima') {
                 $waktuDikirim = $now->copy()->subDays(6);
+                $waktuDiterima = $now->copy()->subDays(1);
             } elseif ($shipStatus === 'Dalam Perjalanan') {
                 $waktuDikirim = $now->copy()->subDays(3);
+                $waktuDiterima = null;
             } elseif ($shipStatus === 'Sedang Dikirim') {
                 $waktuDikirim = $now->copy()->subDays(1);
+                $waktuDiterima = null;
             } else {
                 $waktuDikirim = null;
+                $waktuDiterima = null;
             }
 
             $inserts[] = [
@@ -124,6 +128,9 @@ class ShipmentSeeder extends Seeder
                 'tracking_number' => $tracking,
                 'status' => $shipStatus,
                 'waktu_dikirim' => $waktuDikirim,
+                'waktu_diterima' => $waktuDiterima,
+                'dibuat_pada' => $now,
+                'diupdate_pada' => $now,
             ];
         }
 
