@@ -12,30 +12,39 @@ class ProductImagesSeeder extends Seeder
      */
     public function run(): void
     {
+        $now = now();
         $images = [
             [
                 'product_id' => 1,
                 'url' => 'https://example.com/images/product1-1.jpg',
                 'is_primary' => true,
                 'sort_order' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_id' => 1,
                 'url' => 'https://example.com/images/product1-2.jpg',
                 'is_primary' => false,
                 'sort_order' => 2,
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_id' => 2,
                 'url' => 'https://example.com/images/product2-1.jpg',
                 'is_primary' => true,
                 'sort_order' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'product_id' => 3,
                 'url' => 'https://example.com/images/product3-1.jpg',
                 'is_primary' => true,
                 'sort_order' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
         ];
 
