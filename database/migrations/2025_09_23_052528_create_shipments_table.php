@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('carrier', 100)->nullable();
             $table->string('tracking_number', 100)->nullable();
             $table->enum('status', ['Menunggu Pengiriman', 'Sedang Dikirim', 'Dalam Perjalanan', 'Sudah Diterima', 'Dikembalikan'])->default('Menunggu Pengiriman');
-            $table->timestamp('shipped_at')->nullable();
-            $table->timestamp('delivered_at')->nullable();
-            $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); 
+            $table->timestamp('waktu_dikirim')->nullable();
+            $table->timestamp('waktu_diterima')->nullable();
+            $table->timestamp('dibuat_pada')->nullable()->useCurrent();
+            $table->timestamp('diupdate_pada')->nullable()->useCurrent()->useCurrentOnUpdate(); 
 
             // Indexes
             $table->index('order_id');
