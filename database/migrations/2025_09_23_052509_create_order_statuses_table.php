@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_statuses', function (Blueprint $table) {
-            $table->tinyIncrements('id'); // tinyint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY
+            $table->id();
             $table->string('name', 50);
-            $table->unsignedTinyInteger('sort_order')->default(0);
+            $table->unsignedInteger('sort_order')->default(0);
             
             // Unique constraint
             $table->unique('name');

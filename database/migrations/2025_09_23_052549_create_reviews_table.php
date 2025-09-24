@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->unsignedTinyInteger('rating');
             $table->string('title', 200)->nullable();
             $table->text('body')->nullable();
             $table->boolean('is_approved')->default(false);
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate();
 
             $table->index('rating');
             $table->unique(['user_id', 'product_id'], 'uniq_review_user_product');

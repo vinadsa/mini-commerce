@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unique('session_token', 'uniq_session');
             
             // Index
-            $table->index('user_id', 'idx_cart_user');
+            // $table->index('user_id', 'idx_cart_user'); // Index user_id tidak perlu karena sudah tercakup oleh unique di atas
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id'); // int unsigned NOT NULL AUTO_INCREMENT
             
             // Foreign key column
-            $table->unsignedInteger('user_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             
             // Address information columns
             $table->string('label', 50)->nullable();
@@ -25,21 +25,14 @@ return new class extends Migration
             $table->string('city', 100)->nullable();
             $table->string('province', 100)->nullable();
             $table->string('postal_code', 20)->nullable();
-            $table->string('country', 100)->default('Indonesia');
             $table->boolean('is_default')->default(false);
             
             // Timestamps
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate();
             
             // Index
             $table->index('user_id');
-            
-            // Foreign key constraint
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');
         });
     }
 

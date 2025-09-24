@@ -13,30 +13,15 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id(); // bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedInteger('product_id')->nullable();
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
             $table->string('product_name', 200);
             $table->string('sku', 64)->nullable();
             $table->decimal('price', 12, 2);
             $table->unsignedSmallInteger('qty');
             $table->decimal('subtotal', 12, 2);
-            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
-            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-
-            // Indexes
-            $table->index('order_id');
-            $table->index('product_id');
-
-            // Foreign key constraints
-            $table->foreign('order_id')
-                  ->references('id')
-                  ->on('orders')
-                  ->onDelete('cascade');
-                  
-            $table->foreign('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onDelete('set null');
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); 
         });
     }
 

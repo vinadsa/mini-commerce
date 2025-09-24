@@ -13,29 +13,23 @@ return new class extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id(); // bigint unsigned primary key dengan auto increment
-            $table->unsignedBigInteger('cart_id');
-            $table->unsignedInteger('product_id');
+            
+            // cart_id: bigInteger - gunakan foreignId()
+            $table->foreignId('cart_id')
+                  ->constrained('carts')
+                  ->cascadeOnDelete();
+            
+            $table->foreignId('product_id')->constrained('products')->restrictOnDelete();
+            
             $table->unsignedSmallInteger('qty')->default(1);
             $table->decimal('price', 12, 2);
-            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
-            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            $table->timestamps(); // Otomatis created_at & updated_at dengan behavior yang benar
             
             // Unique constraint untuk cart_id dan product_id
             $table->unique(['cart_id', 'product_id'], 'uniq_cart_product');
-            
-            // Index
+
+            // Index untuk product_id (cart_id sudah auto-index dari foreignId)
             $table->index('product_id');
-            
-            // Foreign key constraints
-            $table->foreign('cart_id')
-                  ->references('id')
-                  ->on('carts')
-                  ->onDelete('cascade');
-                  
-            $table->foreign('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onDelete('restrict');
         });
     }
 

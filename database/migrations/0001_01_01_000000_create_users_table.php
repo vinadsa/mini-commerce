@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id(); // unsigned int AUTO_INCREMENT PRIMARY KEY
             $table->string('name', 100); // varchar(100) NOT NULL
             $table->string('email', 100)->unique(); // varchar(100) NOT NULL dengan UNIQUE KEY
-            $table->string('password', 100); // varchar(100) NOT NULL
+            $table->string('password', 255); // panjang lebih aman untuk hash modern
             $table->enum('role', ['user', 'admin'])->default('user'); // enum dengan default 'user'
-            $table->string('phone', 16)->nullable(); // varchar(16) DEFAULT NULL
+            $table->string('phone', 32)->nullable(); // disamakan dengan user_addresses
             $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
             $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         });
