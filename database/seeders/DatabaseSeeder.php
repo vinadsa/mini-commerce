@@ -54,6 +54,6 @@ class DatabaseSeeder extends Seeder
 // users
 // carts (+ cart_items)
 // order_statuses
-// orders (+ order_items, payments, shipments, order_status_history)
+// orders (+ ouseraddress, order_items, payments, shipments, order_status_history)
 // reviews
 // coupons
