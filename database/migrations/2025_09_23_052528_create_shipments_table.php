@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('delivered_at')->nullable();
             $table->timestamp('received_at')->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->timestamp('deleted_at')->nullable()->useCurrent()->useCurrentOnUpdate(); 
+            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); 
 
             // Indexes
             $table->index('order_id');
