@@ -16,6 +16,8 @@ class OrdersSeeder extends Seeder
     {
         $now = Carbon::now();
 
+        \DB::table('orders')->delete();
+
         $orders = [
             [
                 'order_number' => 'ORD-20250924001',

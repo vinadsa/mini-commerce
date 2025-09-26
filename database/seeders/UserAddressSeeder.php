@@ -38,9 +38,19 @@ class UserAddressSeeder extends Seeder
                 $recipientName = $faker->name();
                 $phone = $user->phone ?: $faker->phoneNumber();
                 // sanitize dan limit panjang phone sesuai kolom (32)
-                $phone = substr(preg_replace('/\s+/', '', $phone), 0, 32);
+                $phone = substr(preg_replace('/[^\d+]/', '', $phone), 0, 32);
 
-                $addressText = $faker->streetAddress() . ($faker->optional(0.6)->secondaryAddress() ? ' ' . $faker->secondaryAddress() : '');
+                // Bangun alamat tanpa secondaryAddress (tidak tersedia di id_ID)
+                $addressText = $faker->streetAddress();
+                $extra = $faker->optional(0.6)->randomElement([
+                    'No. ' . $faker->buildingNumber(),
+                    'Blok ' . $faker->bothify('??-##'),
+                    'Komplek ' . $faker->word() . ' ' . $faker->bothify('##'),
+                    null,
+                ]);
+                if ($extra) {
+                    $addressText .= ' ' . $extra;
+                }
                 $city = $faker->city();
                 $province = $faker->state();
                 $postal = $faker->postcode();

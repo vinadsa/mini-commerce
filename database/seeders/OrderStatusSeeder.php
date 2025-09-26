@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderStatusSeeder extends Seeder
 {
@@ -22,8 +23,6 @@ class OrderStatusSeeder extends Seeder
                 ['name' => 'Dana Dikembalikan', 'sort_order' => 7],
             ];
 
-            foreach ($statuses as $status) {
-                \DB::table('order_statuses')->insert($status);
-            }
+            DB::table('order_statuses')->upsert($statuses, ['name'], ['sort_order']);
     }
 }

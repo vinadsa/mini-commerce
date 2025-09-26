@@ -127,10 +127,10 @@ class ShipmentSeeder extends Seeder
                 'carrier' => $carrier,
                 'tracking_number' => $tracking,
                 'status' => $shipStatus,
-                'waktu_dikirim' => $waktuDikirim,
-                'waktu_diterima' => $waktuDiterima,
-                'dibuat_pada' => $now,
-                'diupdate_pada' => $now,
+                'delivered_at' => $waktuDikirim,
+                'received_at' => $waktuDiterima,
+                'created_at' => $now,
+                'updated_at' => $now,
             ];
         }
 

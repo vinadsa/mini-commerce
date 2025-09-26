@@ -14,21 +14,29 @@ class DatabaseSeeder extends Seeder
         // 1. Master / reference data
         $this->call([
             OrderStatusSeeder::class,
+            CategorySeeder::class,
+            CouponsSeeder::class,
         ]);
 
-        // 2. Users & related
+        // 2. Catalog (butuh categories)
+        $this->call([
+            ProductSeeder::class,
+            ProductImagesSeeder::class,
+        ]);
+
+        // 3. Users & related
         $this->call([
             UsersSeeder::class,
             UserAddressSeeder::class,
         ]);
 
-        // 3. Cart (butuh users)
+        // 4. Cart (butuh users & products)
         $this->call([
             CartsSeeder::class,
-            // CartItemsTableSeeder::class, // tambahkan jika ada
+            CartItemsSeeder::class,
         ]);
 
-        // 4. Orders + related (order items, payments, shipments)
+        // 5. Orders + related
         $this->call([
             OrdersSeeder::class,
             OrderItemSeeder::class,
@@ -36,13 +44,12 @@ class DatabaseSeeder extends Seeder
             ShipmentSeeder::class,
         ]);
 
-        // 5. Riwayat status lalu review (mengandalkan order_status_history)
+        // 6. Riwayat + review
         $this->call([
             OrderStatusHistorySeeder::class,
             ReviewsSeeder::class,
         ]);
 
-        // Test user (buat setelah UsersSeeder agar tidak tertimpa)
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

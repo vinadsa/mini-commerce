@@ -13,6 +13,9 @@ class OrderItemSeeder extends Seeder
     public function run(): void
     {
         $now = now();
+
+        \DB::table('order_items')->delete();
+
         $items = [
             // Untuk order_id 1 (ORD-20250924001)
             [
