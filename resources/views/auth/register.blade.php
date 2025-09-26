@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daftar Pengguna - Mini-Commerce</title>
 
-  {{-- Tailwind via CDN (cepat pakai). Jika sudah pakai Vite, ganti dengan @vite('resources/css/app.css') --}}
+  {{-- Tailwind via CDN --}}
   <script src="https://cdn.tailwindcss.com"></script>
 
   {{-- Google Fonts: Poppins --}}
@@ -22,10 +22,11 @@
 <body class="font-poppins bg-white text-slate-900">
   {{-- Header --}}
   <header class="fixed inset-x-0 top-0 z-50 h-20 bg-white/90 backdrop-blur border-b border-slate-100">
-    <div class="max-w-6xl mx-auto h-full flex items-center px-6">
+    <div class="h-full flex items-center gap-4 pl-4">
       <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">
-        Mini<span class="text-fuchsia-700">Commerce</span>
+        SA<span class="text-fuchsia-700">GA</span>
       </a>
+      <span class="text-base font-medium text-slate-900">Register</span>
     </div>
   </header>
 
@@ -42,9 +43,15 @@
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
           </div>
-          <h1 class="mt-2 text-4xl font-extrabold italic select-none">
-            <span class="text-white">SA</span><span class="text-[#5a0a78]">GA</span>
-          </h1>
+          <div class="brand-text">
+            <h1 class="mt-2 text-4xl font-extrabold italic select-none">
+              <span class="text-white">SA</span><span class="text-[#5a0a78]">GA</span>
+            </h1>
+            <p class="mt-2 text-lg font-semibold leading-tight">
+              <span class="text-[#5a0a78]">Store All</span>
+              <span class="text-white">Goods Available</span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -100,7 +107,7 @@
                      placeholder="Password"
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 pr-12 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
               <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan password">
-                <img src="{{ asset('img/eye.svg') }}" alt="toggle" class="w-5 h-5" />
+                <img src="{{ asset('assets/eye.svg') }}" alt="toggle" class="w-5 h-5" />
               </button>
               @error('password')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -114,7 +121,7 @@
                      placeholder="Confirm Password"
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 pr-12 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
               <button type="button" id="togglePasswordConfirm" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan confirm password">
-                <img src="{{ asset('img/eye.svg') }}" alt="toggle" class="w-5 h-5" />
+                <img src="{{ asset('assets/eye.svg') }}" alt="toggle" class="w-5 h-5" />
               </button>
             </div>
 
@@ -146,7 +153,7 @@
           isShown = !isShown;
           field.type = isShown ? 'text' : 'password';
           const img = this.querySelector('img');
-          if (img) img.src = isShown ? '{{ asset('img/eye-off.svg') }}' : '{{ asset('img/eye.svg') }}';
+          if (img) img.src = isShown ? '{{ asset('assets/eye-off.svg') }}' : '{{ asset('assets/eye.svg') }}';
         });
       }
       setupToggle('password', 'togglePassword');

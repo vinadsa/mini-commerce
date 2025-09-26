@@ -1,4 +1,4 @@
-{{-- resources/views/auth/set-password.blade.php --}}
+{{-- resources/views/auth/confirm-password.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -22,14 +22,14 @@
 <body class="font-poppins bg-white text-slate-900">
   {{-- Header --}}
   <header class="fixed inset-x-0 top-0 z-50 h-20 bg-white/90 backdrop-blur border-b border-slate-100">
-    <div class="max-w-6xl mx-auto h-full flex items-center justify-between px-6">
-      <div class="flex items-center gap-6">
-        <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">SA<span class="text-fuchsia-700">GA</span></a>
-        <span class="text-base font-medium text-slate-900">Log in</span>
-      </div>
+    <div class="h-full flex items-center gap-4 pl-4">
+      <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">
+        SA<span class="text-fuchsia-700">GA</span>
+      </a>
+      <span class="text-base font-medium text-slate-900">Log in</span>
     </div>
   </header>
-
+  
   <main class="pt-20 h-[calc(100vh-80px)]">
     <div class="flex h-full flex-col md:flex-row">
       {{-- Panel kiri (branding) --}}
