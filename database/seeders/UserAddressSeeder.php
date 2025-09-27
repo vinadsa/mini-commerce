@@ -40,7 +40,7 @@ class UserAddressSeeder extends Seeder
                 // sanitize dan limit panjang phone sesuai kolom (32)
                 $phone = substr(preg_replace('/\s+/', '', $phone), 0, 32);
 
-                $addressText = $faker->streetAddress() . ($faker->optional(0.6)->secondaryAddress() ? ' ' . $faker->secondaryAddress() : '');
+               $addressText = $faker->streetAddress() . ($faker->optional(0.6)->buildingNumber() ? ' No. ' . $faker->buildingNumber() : '');
                 $city = $faker->city();
                 $province = $faker->state();
                 $postal = $faker->postcode();
