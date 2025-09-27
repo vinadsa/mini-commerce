@@ -17,4 +17,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/admin/orders', function () {
+    return view('admin.admin-orders');
+});
+
+Route::get('/admin/products', function () {
+    return view('admin.admin-products');
+});
+
+Route::get('/admin/shipments', function () {
+    return view('admin.admin-shipments');
+});
+
 require __DIR__.'/auth.php';
