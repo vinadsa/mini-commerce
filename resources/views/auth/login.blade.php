@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Pengguna - SAGA</title>
 
-  {{-- Tailwind via CDN (cepat pakai). Jika proyek sudah pakai Vite+Tailwind, ganti dengan @vite('resources/css/app.css') --}}
+  {{-- Tailwind via CDN --}}
   <script src="https://cdn.tailwindcss.com"></script>
 
   {{-- Google Fonts: Poppins --}}
@@ -22,11 +22,11 @@
 <body class="font-poppins bg-white text-slate-900 select-none">
   {{-- Header --}}
   <header class="fixed inset-x-0 top-0 z-50 h-20 bg-white/90 backdrop-blur border-b border-slate-100">
-    <div class="max-w-6xl mx-auto h-full flex items-center justify-between px-6">
-      <div class="flex items-center gap-6">
-        <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">SA<span class="text-fuchsia-700">GA</span></a>
-        <span class="text-base font-medium text-slate-900">Log in</span>
-      </div>
+    <div class="h-full flex items-center gap-4 pl-4">
+      <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">
+        SA<span class="text-fuchsia-700">GA</span>
+      </a>
+      <span class="text-base font-medium text-slate-900">Log in</span>
     </div>
   </header>
 
@@ -78,7 +78,7 @@
               <input id="password" name="password" type="password" required placeholder="Password"
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 pr-12 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
               <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan kata sandi">
-                <img src="{{ asset('img/eye.svg') }}" alt="toggle" class="w-5 h-5" />
+                <img src="{{ asset('assets/eye.svg') }}" alt="toggle" class="w-5 h-5" />
               </button>
             </div>
 
@@ -102,10 +102,10 @@
             {{-- Login sosial --}}
             <div class="flex gap-3 mb-1">
               <button type="button" class="flex-1 border border-slate-200 rounded-lg px-4 py-3 text-sm inline-flex items-center justify-center gap-2 bg-white">
-                <img src="{{ asset('img/facebook.png') }}" alt="Facebook" class="w-5 h-5"> Facebook
+                <img src="{{ asset('assets/facebook.png') }}" alt="Facebook" class="w-5 h-5"> Facebook
               </button>
               <button type="button" class="flex-1 border border-slate-200 rounded-lg px-4 py-3 text-sm inline-flex items-center justify-center gap-2 bg-white">
-                <img src="{{ asset('img/google.png') }}" alt="Google" class="w-5 h-5"> Google
+                <img src="{{ asset('assets/google.png') }}" alt="Google" class="w-5 h-5"> Google
               </button>
             </div>
 
@@ -130,7 +130,7 @@
         isShown = !isShown;
         passwordField.type = isShown ? 'text' : 'password';
         const img = this.querySelector('img');
-        if (img) img.src = isShown ? '{{ asset('img/eye-off.svg') }}' : '{{ asset('img/eye.svg') }}';
+        if (img) img.src = isShown ? '{{ asset('assets/eye-off.svg') }}' : '{{ asset('assets/eye.svg') }}';
       });
     })();
   </script>

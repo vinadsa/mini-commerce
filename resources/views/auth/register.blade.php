@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daftar Pengguna - Mini-Commerce</title>
 
-  {{-- Tailwind via CDN (cepat pakai). Jika sudah pakai Vite, ganti dengan @vite('resources/css/app.css') --}}
+  {{-- Tailwind via CDN --}}
   <script src="https://cdn.tailwindcss.com"></script>
 
   {{-- Google Fonts: Poppins --}}
@@ -22,10 +22,11 @@
 <body class="font-poppins bg-white text-slate-900">
   {{-- Header --}}
   <header class="fixed inset-x-0 top-0 z-50 h-20 bg-white/90 backdrop-blur border-b border-slate-100">
-    <div class="max-w-6xl mx-auto h-full flex items-center px-6">
+    <div class="h-full flex items-center gap-4 pl-4">
       <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">
-        Mini<span class="text-fuchsia-700">Commerce</span>
+        SA<span class="text-fuchsia-700">GA</span>
       </a>
+      <span class="text-base font-medium text-slate-900">Register</span>
     </div>
   </header>
 
@@ -42,9 +43,15 @@
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
           </div>
-          <h1 class="mt-2 text-4xl font-extrabold italic select-none">
-            <span class="text-white">SA</span><span class="text-[#5a0a78]">GA</span>
-          </h1>
+          <div class="brand-text">
+            <h1 class="mt-2 text-4xl font-extrabold italic select-none">
+              <span class="text-white">SA</span><span class="text-[#5a0a78]">GA</span>
+            </h1>
+            <p class="mt-2 text-lg font-semibold leading-tight">
+              <span class="text-[#5a0a78]">Store All</span>
+              <span class="text-white">Goods Available</span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -57,74 +64,100 @@
           <form method="POST" action="{{ route('register') }}" class="space-y-4">
             @csrf
 
-            {{-- Username/Email/No HP --}}
+            {{-- Name --}}
             <div>
-              <label for="identity" class="sr-only">No. Handphone / Username / Email</label>
-              <input id="identity" name="identity" type="text" required
-                     placeholder="No.Handphone/Username/Email"
+              <label for="name" class="sr-only">Name</label>
+              <input id="name" name="name" type="text" required autocomplete="name"
+                     value="{{ old('name') }}"
+                     placeholder="Name"
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              @error('name')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            {{-- Email --}}
+            <div>
+              <label for="email" class="sr-only">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                     value="{{ old('email') }}"
+                     placeholder="Email"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              @error('email')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            {{-- No. Handphone --}}
+            <div>
+              <label for="phone" class="sr-only">No. Handphone</label>
+              <input id="phone" name="phone" type="tel" required autocomplete="tel"
+                     value="{{ old('phone') }}"
+                     placeholder="No. Handphone"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              @error('phone')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
             </div>
 
             {{-- Password + toggle --}}
             <div class="relative">
-              <label for="password" class="sr-only">Kata Sandi</label>
-              <input id="password" name="password" type="password" required placeholder="Kata sandi"
+              <label for="password" class="sr-only">Password</label>
+              <input id="password" name="password" type="password" required autocomplete="new-password"
+                     placeholder="Password"
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 pr-12 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
-              <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan kata sandi">
-                <img src="{{ asset('img/eye.svg') }}" alt="toggle" class="w-5 h-5" />
+              <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan password">
+                <img src="{{ asset('assets/eye.svg') }}" alt="toggle" class="w-5 h-5" />
+              </button>
+              @error('password')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            {{-- Confirm Password + toggle --}}
+            <div class="relative">
+              <label for="password_confirmation" class="sr-only">Confirm Password</label>
+              <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
+                     placeholder="Confirm Password"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 pr-12 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              <button type="button" id="togglePasswordConfirm" class="absolute inset-y-0 right-0 px-3 grid place-items-center opacity-80" aria-label="Tampilkan/sembunyikan confirm password">
+                <img src="{{ asset('assets/eye.svg') }}" alt="toggle" class="w-5 h-5" />
               </button>
             </div>
 
-            {{-- Tombol berikutnya/daftar --}}
-            <button type="submit" class="w-full rounded-lg bg-gradient-to-br from-[#EF79FC] to-[#EF79FC] text-white font-semibold py-3 transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(199,125,255,0.4)] active:translate-y-0">
-              BERIKUTNYA
-            </button>
-
-            {{-- Divider --}}
-            <div class="flex items-center gap-3 my-2 text-slate-500 text-sm">
-              <span class="flex-1 border-t border-slate-200"></span>
-              <span>ATAU</span>
-              <span class="flex-1 border-t border-slate-200"></span>
-            </div>
-
-            {{-- Login sosial --}}
-            <div class="flex gap-3 mb-1">
-              <button type="button" class="flex-1 border border-slate-200 rounded-lg px-4 py-3 text-sm inline-flex items-center justify-center gap-2 bg-white">
-                <img src="{{ asset('img/facebook.png') }}" alt="Facebook" class="w-5 h-5"> Facebook
-              </button>
-              <button type="button" class="flex-1 border border-slate-200 rounded-lg px-4 py-3 text-sm inline-flex items-center justify-center gap-2 bg-white">
-                <img src="{{ asset('img/google.png') }}" alt="Google" class="w-5 h-5"> Google
-              </button>
-            </div>
-
-            {{-- Lupa password (opsional) --}}
-            <div class="text-left mt-1">
-              <a href="{{ route('password.request') }}" class="text-sm text-slate-700 hover:underline">Lupa kata sandi?</a>
-            </div>
-
-            {{-- Link login --}}
-            <p class="text-center text-sm text-slate-600 mt-2">
-              Punya Akun? <a href="{{ route('login') }}" class="text-[#EF79FC] font-semibold hover:underline">Login</a>
+            {{-- Already Registered? --}}
+            <p class="text-center text-sm text-slate-600">
+              Already Registered?
+              <a href="{{ route('login') }}" class="text-[#EF79FC] font-semibold hover:underline">Login</a>
             </p>
+
+            {{-- Tombol Register --}}
+            <button type="submit" class="w-full rounded-lg bg-gradient-to-br from-[#EF79FC] to-[#EF79FC] text-white font-semibold py-3 transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(199,125,255,0.4)] active:translate-y-0">
+              Register
+            </button>
           </form>
         </div>
       </section>
     </div>
   </main>
 
-  {{-- Script toggle password --}}
+  {{-- Script toggle password (password & confirm) --}}
   <script>
     (function() {
-      const passwordField = document.getElementById('password');
-      const toggleBtn = document.getElementById('togglePassword');
-      let isShown = false;
-      if (!passwordField || !toggleBtn) return;
-      toggleBtn.addEventListener('click', function () {
-        isShown = !isShown;
-        passwordField.type = isShown ? 'text' : 'password';
-        const img = this.querySelector('img');
-        if (img) img.src = isShown ? '{{ asset('img/eye-off.svg') }}' : '{{ asset('img/eye.svg') }}';
-      });
+      function setupToggle(inputId, btnId) {
+        const field = document.getElementById(inputId);
+        const btn = document.getElementById(btnId);
+        if (!field || !btn) return;
+        let isShown = false;
+        btn.addEventListener('click', function () {
+          isShown = !isShown;
+          field.type = isShown ? 'text' : 'password';
+          const img = this.querySelector('img');
+          if (img) img.src = isShown ? '{{ asset('assets/eye-off.svg') }}' : '{{ asset('assets/eye.svg') }}';
+        });
+      }
+      setupToggle('password', 'togglePassword');
+      setupToggle('password_confirmation', 'togglePasswordConfirm');
     })();
   </script>
 </body>

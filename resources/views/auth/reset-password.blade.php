@@ -1,39 +1,109 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+{{-- resources/views/auth/reset-password.blade.php --}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password - Mini-Commerce</title>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+  {{-- Tailwind via CDN --}}
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+  {{-- Google Fonts: Poppins --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body { height: 100%; }
+    .font-poppins { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif; }
+  </style>
+</head>
+<body class="font-poppins bg-white text-slate-900">
+  {{-- Header --}}
+  <header class="fixed inset-x-0 top-0 z-50 h-20 bg-white/90 backdrop-blur border-b border-slate-100">
+    <div class="h-full flex items-center gap-4 pl-4">
+      <a href="{{ url('/') }}" class="text-2xl font-extrabold italic tracking-tight text-fuchsia-700">
+        SA<span class="text-fuchsia-700">GA</span>
+      </a>
+      <span class="text-base font-medium text-slate-900">Log in</span>
+    </div>
+  </header>
+
+  <main class="pt-20 h-[calc(100vh-80px)]">
+    <div class="flex h-full flex-col md:flex-row">
+      {{-- Panel kiri (branding) --}}
+      <section class="flex-1 bg-gradient-to-br from-[#C77DFF] to-[#EF79FC] text-white flex items-center justify-center p-10">
+        <div class="text-center">
+          <div class="mb-6 inline-flex text-white">
+            {{-- Ikon keranjang --}}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </div>
+          <h1 class="mt-2 text-4xl font-extrabold italic select-none">
+            <span class="text-white">SA</span><span class="text-[#5a0a78]">GA</span>
+          </h1>
+          <p class="mt-2 text-lg font-semibold leading-tight">
+            <span class="text-[#5a0a78]">Store All</span>
+            <span class="text-white">Goods Available</span>
+          </p>
         </div>
+      </section>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+      {{-- Panel kanan (form reset password) --}}
+      <section class="flex-1 bg-slate-50 flex items-center justify-center p-6 md:p-10">
+        <div class="w-full max-w-md bg-white rounded-3xl shadow-[0_20px_60px_-10px_rgba(199,125,255,0.2)] p-8">
+          <h2 class="text-center text-2xl font-bold mb-8">Reset Password</h2>
+
+          {{-- Form reset password --}}
+          <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
+            @csrf
+
+            {{-- Token reset password --}}
+            <input type="hidden" name="token" value="{{ request()->route('token') }}">
+
+            {{-- Email --}}
+            <div>
+              <label for="email" class="sr-only">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                     value="{{ old('email') }}"
+                     placeholder="Email"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              @error('email')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            {{-- Password baru --}}
+            <div>
+              <label for="password" class="sr-only">Password Baru</label>
+              <input id="password" name="password" type="password" required autocomplete="new-password"
+                     placeholder="Password Baru"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+              @error('password')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            {{-- Konfirmasi Password --}}
+            <div>
+              <label for="password_confirmation" class="sr-only">Konfirmasi Password</label>
+              <input id="password_confirmation" name="password_confirmation" type="password" required autocomplete="new-password"
+                     placeholder="Konfirmasi Password"
+                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base outline-none focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-200" />
+            </div>
+
+            {{-- Tombol submit --}}
+            <button type="submit" class="w-full rounded-lg bg-gradient-to-br from-[#EF79FC] to-[#EF79FC] text-white font-semibold py-3 transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(199,125,255,0.4)] active:translate-y-0">
+              Reset Password
+            </button>
+          </form>
         </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

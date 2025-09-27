@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('password', 255); // panjang lebih aman untuk hash modern
             $table->enum('role', ['user', 'admin'])->default('user'); // enum dengan default 'user'
             $table->string('phone', 32)->nullable(); // disamakan dengan user_addresses
-            $table->timestamp('created_at')->nullable()->useCurrent(); // DEFAULT CURRENT_TIMESTAMP
-            $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate(); // DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
