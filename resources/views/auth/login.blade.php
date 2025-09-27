@@ -63,8 +63,17 @@
                      class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-300"/>
 
               {{-- Password --}}
-              <input type="password" name="password" placeholder="Password"
-                     class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-300"/>
+              <div class="relative">
+                <input id="password" type="password" name="password" placeholder="Password"
+                       class="w-full rounded-lg border border-slate-200 px-4 py-3 text-base focus:ring-4 focus:ring-fuchsia-100 focus:border-fuchsia-300 pr-10"/>
+
+                {{-- Toggle button pakai asset --}}
+                <button type="button" onclick="togglePassword()" 
+                        class="absolute inset-y-0 right-3 flex items-center">
+                  <img id="eye-off" src="{{ asset('assets/eye-off.svg') }}" alt="Sembunyikan" class="w-5 h-5">
+                  <img id="eye-on" src="{{ asset('assets/eye.svg') }}" alt="Tampilkan" class="w-5 h-5 hidden">
+                </button>
+              </div>
 
               {{-- Tombol login --}}
               <button type="submit"
@@ -86,8 +95,15 @@
 
             {{-- Sosmed --}}
             <div class="flex gap-3">
-              <button class="flex-1 border rounded-lg py-2 hover:bg-slate-50">Facebook</button>
-              <button class="flex-1 border rounded-lg py-2 hover:bg-slate-50">Google</button>
+              <button class="flex-1 border rounded-lg py-2 hover:bg-slate-50 flex items-center justify-center gap-2">
+                <img src="{{ asset('assets/facebook.png') }}" alt="Facebook" class="w-5 h-5">
+                <span>Facebook</span>
+              </button>
+
+              <button class="flex-1 border rounded-lg py-2 hover:bg-slate-50 flex items-center justify-center gap-2">
+                <img src="{{ asset('assets/google.png') }}" alt="Google" class="w-5 h-5">
+                <span>Google</span>
+              </button>
             </div>
 
             <p class="mt-6 text-sm text-center">
@@ -99,5 +115,24 @@
 
     </div>
   </main>
+
+  {{-- Script toggle password --}}
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const eyeOff = document.getElementById('eye-off');
+      const eyeOn = document.getElementById('eye-on');
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeOff.classList.add('hidden');
+        eyeOn.classList.remove('hidden');
+      } else {
+        input.type = 'password';
+        eyeOn.classList.add('hidden');
+        eyeOff.classList.remove('hidden');
+      }
+    }
+  </script>
 </body>
 </html>
