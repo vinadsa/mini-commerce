@@ -1,61 +1,70 @@
-@extends('layouts.admin')
-
-@section('page_title', 'Pesanan Saya')
+@extends('layouts.app')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-4">Pesanan Saya</h2>
+<div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-48 bg-purple-100 min-h-screen p-4">
+        <nav>
+            <ul class="space-y-4">
+                <li><a href="#" class="font-semibold text-purple-800 border-b-2 border-purple-800">Pesanan</a></li>
+                <li><a href="#">Pengiriman</a></li>
+                <li><a href="#">Produk</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    {{-- Tabs --}}
-    <div class="flex border-b border-gray-300 mb-5">
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Semua</button>
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Belum Bayar</button>
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Perlu Dikirim</button>
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Dikirim</button>
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Selesai</button>
-        <button class="px-3 py-2 text-sm hover:text-[#ef79fc] transition duration-150">Pengembalian/Pembatalan</button>
-    </div>
+    <!-- Main -->
+    <main class="flex-1 p-6 bg-white rounded-lg shadow ml-4">
+        <h2 class="text-xl font-semibold mb-4">Pesanan Saya</h2>
 
-    {{-- Filter Status Pesanan --}}
-    <div class="flex items-center mb-4">
-        <span class="mr-4 font-medium">Status Pesanan</span>
-        <button class="border border-gray-500 bg-white px-3 py-1 rounded-full mr-2 hover:bg-[#ef79fc] hover:text-white text-sm">Semua</button>
-        <button class="border border-gray-500 bg-white px-3 py-1 rounded-full mr-2 hover:bg-[#ef79fc] hover:text-white text-sm">Perlu diproses</button>
-        <button class="border border-gray-500 bg-white px-3 py-1 rounded-full mr-2 hover:bg-[#ef79fc] hover:text-white text-sm">Telah diproses</button>
-    </div>
+        <!-- Tabs -->
+        <div class="space-x-3 mb-4">
+            <button class="hover:text-pink-500">Semua</button>
+            <button>Belum Bayar</button>
+            <button>Perlu Dikirim</button>
+            <button>Dikirim</button>
+            <button>Selesai</button>
+            <button>Pengembalian/Pembatalan</button>
+        </div>
 
-    {{-- Filter Inputs --}}
-    <div class="flex items-center mb-5">
-        <input type="text" placeholder="No. Pesanan" class="p-2 mr-2 border border-gray-300 rounded-md">
-        <select class="p-2 mr-2 border border-gray-300 rounded-md">
-            <option>Jasa Kirim</option>
-            <option>SiCepat Reg</option>
-            <option>JNE</option>
-            <option>Pos Indonesia</option>
-        </select>
-    </div>
+        <div class="flex items-center gap-3 mb-4">
+            <span class="font-medium">Status Pesanan:</span>
+            <button class="border px-3 py-1 rounded-full">Semua</button>
+            <button class="border px-3 py-1 rounded-full">Perlu diproses</button>
+            <button class="border px-3 py-1 rounded-full">Telah diproses</button>
+        </div>
 
-    <p class="mb-3"><strong>1 Paket</strong></p>
+        <div class="flex gap-3 mb-4">
+            <input type="text" placeholder="No. Pesanan" class="border px-2 py-1 rounded">
+            <select class="border px-2 py-1 rounded">
+                <option>Jasa Kirim</option>
+                <option>SiCepat Reg</option>
+                <option>JNE</option>
+                <option>Pos Indonesia</option>
+            </select>
+        </div>
 
-    {{-- Tabel Pesanan --}}
-    <table class="w-full border-collapse bg-white shadow-md">
-        <thead>
-            <tr>
-                <th class="bg-[#d3c7d8] p-3 text-left">Produk</th>
-                <th class="bg-[#d3c7d8] p-3 text-left">Status</th>
-                <th class="bg-[#d3c7d8] p-3 text-left">Jasa Kirim</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="p-4 border-b border-gray-200">
-                    <div class="flex items-center">
-                        <input type="checkbox" class="mr-3">
-                        <img src="https://via.placeholder.com/80x80?text=Tshirt" alt="Produk" class="rounded-lg shadow-sm w-20 h-20 mr-3">
-                    </div>
-                </td>
-                <td class="p-4 border-b border-gray-200">Telah diproses</td>
-                <td class="p-4 border-b border-gray-200">SiCepat Reg</td>
-            </tr>
-        </tbody>
-    </table>
+        <p class="font-bold mb-2">1 Paket</p>
+
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="bg-purple-200 text-left">
+                    <th class="p-2">Produk</th>
+                    <th class="p-2">Status</th>
+                    <th class="p-2">Jasa Kirim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b">
+                    <td class="flex items-center gap-2 p-2">
+                        <input type="checkbox">
+                        <img src="https://via.placeholder.com/80x80?text=Tshirt" class="rounded">
+                    </td>
+                    <td class="p-2">Telah diproses</td>
+                    <td class="p-2">SiCepat Reg</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
 @endsection
